@@ -26,7 +26,6 @@ export default function Login({ handleAcc }) {
       );
 
       if (correctUser.length > 0) {
-        alert("Welcome");
         dispatch(login());
       } else {
         alert("Username Or Password Is Incorrect .");
