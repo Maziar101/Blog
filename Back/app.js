@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import CategoryRoutes from "./Routes/Category.js";
 import UserRoutes from "./Routes/User.js";
+import PostRoutes from "./Routes/Post.js";
 dotenv.config({path:"./config.env"});
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(cors());
 // Routes
 app.use("/api/categories",CategoryRoutes);
 app.use("/api/users",UserRoutes);
-
+app.use("/api/posts",PostRoutes);
 
 app.use("*",(req,res)=>{
     res.status(404).json({message:"Api Address Not Found"});

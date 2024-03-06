@@ -3,12 +3,12 @@ import "../index.css";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { HashLoader } from "react-spinners";
 import FormFields from "../../../utils/useFormFields";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/Slices/AuthSlice";
 export default function Login({ handleAcc }) {
   const dispatch = useDispatch();
   const [users, setUsers] = useState();
-
+  const {token} = useSelector(state=>state.auth);
   const [fields, handleFields] = FormFields();
   useEffect(() => {
     (async () => {
@@ -26,14 +26,16 @@ export default function Login({ handleAcc }) {
       );
 
       if (correctUser.length > 0) {
-        dispatch(login());
+        const loggedInUser = correctUser[0];
+        dispatch(login(loggedInUser?._id));
       } else {
         alert("Username Or Password Is Incorrect .");
       }
     } else {
       alert("Please enter username and password");
     }
-  };
+};
+
 
   return (
     <>
