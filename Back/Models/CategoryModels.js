@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CategoryMode = mongoose.Schema({
+const CategoryMode = new mongoose.Schema({
     name: {
         type:String,
         required:[true,"Please provide a category name"],
