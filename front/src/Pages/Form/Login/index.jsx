@@ -8,7 +8,6 @@ import { login } from "../../../store/Slices/AuthSlice";
 export default function Login({ handleAcc }) {
   const dispatch = useDispatch();
   const [users, setUsers] = useState();
-  const {token} = useSelector(state=>state.auth);
   const [fields, handleFields] = FormFields();
   useEffect(() => {
     (async () => {

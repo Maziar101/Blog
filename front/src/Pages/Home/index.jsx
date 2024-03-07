@@ -14,11 +14,11 @@ export default function Home() {
   }, []);
   const items = posts?.map((e, index) => (
     <Stack sx={{ display: "flex", gap: "20px" , border:"1px solid #a78bfa" , width:"350px" , padding:"25px"}} key={index}>
-      <Typography>{e?.title}</Typography>
+      <Typography variant="h5">{e?.title}</Typography>
       <Typography>{e?.desc?.slice(0,50)} ...</Typography>
       <Typography>Author : {e?.author}</Typography>
       <Button variant="contained" color="secondary">
-        <Link style={{width:"100%"}} to={`/post-details/${e?._id}`}>More Info</Link>
+        <Link style={{width:"100%"}} to={`/post-details/${e?.title?.split(" ")?.join("-")}/${e?._id}`}>More Info</Link>
       </Button>
     </Stack>
   ));
@@ -26,7 +26,7 @@ export default function Home() {
     <>
       {posts ? (
         <>
-          <Box sx={{ marginTop: "100px" }}>
+          <Box>
             <Typography variant="h2">Posts</Typography>
             <Box
               sx={{
