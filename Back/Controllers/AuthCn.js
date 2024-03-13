@@ -17,26 +17,26 @@ export const Login = async (req,res)=>{
     if(!username || !password){
         return res.status(400).send("Please Provide username and password");
     }
-    const user = User.findOne(username);
+    const user = await User.findOne({username});
     if(!user){
         return res.status(400).json({
             message:"username or password is incorrect",
             data:null,
         });
     };
-    const correctPassword = bcryptjs.compareSync(password,user.password);
+    const correctPassword = bcryptjs.compare(password,user.password);
     if(!correctPassword){
         return res.status(400).json({
             message:"username or password is incorrect",
             data:null,
         });
     };
-    const {password:hashPass,...userOthers} = user;
+    const {password:hashPass,...userOthers} = user._doc;
     const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
     res.status(200).json({
         data:{
             token,
-            userOthers,
+            user:userOthers,
         },
         message:"Login Successfully"
     });
