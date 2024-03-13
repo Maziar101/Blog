@@ -9,14 +9,6 @@ export default function Login({ handleAcc }) {
   const dispatch = useDispatch();
   const [users, setUsers] = useState();
   const [fields, handleFields] = FormFields();
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("http://localhost:5000/api/users");
-      const data = await res.json();
-      console.log(data?.data);
-      setUsers(data?.data);
-    })();
-  }, []);
   const handleLogin = async () => {
     if (fields?.username && fields?.password) {
       const correctUser = users.filter(
@@ -33,57 +25,51 @@ export default function Login({ handleAcc }) {
     } else {
       alert("Please enter username and password");
     }
-};
-
+  };
 
   return (
     <>
-      {users ? (
-        <>
-          <Stack class="form-container">
-            <Typography class="title">Login</Typography>
-            <Stack class="form">
-              <Stack class="input-group">
-                <TextField
-                  sx={{ width: "100%" }}
-                  label="Username"
-                  color="secondary"
-                  onChange={handleFields}
-                  type="text"
-                  name="username"
-                  id="username"
-                />
-              </Stack>
-              <Stack class="input-group">
-                <TextField
-                  sx={{ width: "100%" }}
-                  label="Password"
-                  type="password"
-                  color="secondary"
-                  onChange={handleFields}
-                  name="password"
-                  id="password"
-                />
-              </Stack>
-              <button onClick={handleLogin} class="sign">
-                Login
-              </button>
-            </Stack>
-            <Typography class="signup">
-              Don't have an account?{" "}
-              <Button
-                onClick={handleAcc}
-                rel="noopener noreferrer"
-                class="changebtn"
-              >
-                Register
-              </Button>
-            </Typography>
+      {" "}
+      <Stack class="form-container">
+        <Typography class="title">Login</Typography>
+        <Stack class="form">
+          <Stack class="input-group">
+            <TextField
+              sx={{ width: "100%" }}
+              label="Username"
+              color="secondary"
+              onChange={handleFields}
+              type="text"
+              name="username"
+              id="username"
+            />
           </Stack>
-        </>
-      ) : (
-        <HashLoader size={80} color="#A78BFA" style={{ margin: "auto" }} />
-      )}
+          <Stack class="input-group">
+            <TextField
+              sx={{ width: "100%" }}
+              label="Password"
+              type="password"
+              color="secondary"
+              onChange={handleFields}
+              name="password"
+              id="password"
+            />
+          </Stack>
+          <button onClick={handleLogin} class="sign">
+            Login
+          </button>
+        </Stack>
+        <Typography class="signup">
+          Don't have an account?{" "}
+          <Button
+            onClick={handleAcc}
+            rel="noopener noreferrer"
+            class="changebtn"
+          >
+            Register
+          </Button>
+        </Typography>
+      </Stack>
     </>
   );
 }

@@ -20,11 +20,8 @@ export default function Register({handleAcc}) {
           }),
         });
         const data = await res.json();
-        if(data?.status == "success"){
-          handleAcc();
-        }else{
-          alert("Error !");
-        }
+        alert(data?.message);
+        handleAcc();
       })();
     }else{
       alert("Please fill out all fields");

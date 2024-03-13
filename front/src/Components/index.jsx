@@ -55,7 +55,7 @@ export default function Header() {
               <Stack component={"li"}>
                 <Link
                   to={"/login-register"}
-                  style={{ color: "#A78BFA", fontSize: "18px" , fontSize:"18px" }}
+                  style={{ color: "#A78BFA", fontSize: "18px"}}
                 >
                   Login/Register
                 </Link>
