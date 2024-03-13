@@ -1,8 +1,8 @@
 import express from "express";
-import { createUser, getAllUsers } from "../Controllers/UserCn.js";
+import { Login, Register } from "../Controllers/AuthCn.js";
 
 const UserRoutes = express.Router();
-UserRoutes.route("/").get(getAllUsers);
-UserRoutes.route("/register").post(createUser);
+UserRoutes.route("/").post(Login);
+UserRoutes.route("/register").post(Register);
 
 export default UserRoutes;
