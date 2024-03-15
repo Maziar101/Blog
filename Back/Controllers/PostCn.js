@@ -35,9 +35,9 @@ export const createPost = async (req, res, next) => {
     return res.status(401).json({ err });
   }
 };
-export const getOnePost = (req, res, next) => {
+export const getOnePost = async (req, res, next) => {
   try {
-    const OnePost = Post.findById(req.params.id).select([
+    const OnePost = await Post.findById(req.params.id).select([
       "-_id",
       "-__v",
       "-userid",
@@ -53,9 +53,9 @@ export const getOnePost = (req, res, next) => {
     });
   }
 };
-export const updatePost = (req, res, next) => {
+export const updatePost = async (req, res, next) => {
   try {
-    const updatedPost = Post.findByIdAndUpdate(
+    const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
       { ...req.body },
       { new: true }
@@ -69,6 +69,18 @@ export const updatePost = (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       message: err.message,
+    });
+  }
+};
+export const deletePost = async (req, res, next) => {
+  try {
+    const removedPost = await Post.findByIdAndDelete(req.params.id);
+    return res.status(201).json({
+      message: "Post Has Been Deleted",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: err,
     });
   }
 };
