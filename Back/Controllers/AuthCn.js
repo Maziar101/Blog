@@ -32,7 +32,7 @@ export const Login = async (req,res)=>{
         });
     };
     const {password:hashPass,...userOthers} = user._doc;
-    const token = jwt.sign({id:user._id},process.env.JWT_SECRET);
+    const token = jwt.sign({id:user._id,username:user.username},process.env.JWT_SECRET);
     res.status(200).json({
         data:{
             token,
