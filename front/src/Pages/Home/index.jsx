@@ -4,24 +4,39 @@ import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 
 export default function Home() {
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
   useEffect(() => {
     (async () => {
       const res = await fetch("http://localhost:5000/api/posts");
       const data = await res.json();
-      setPosts(data?.data);
+      setPosts(data?.data?.posts);
     })();
   }, []);
   const items = posts?.map((e, index) => (
-    <Stack sx={{ display: "flex", gap: "20px" , border:"1px solid #a78bfa" , width:"350px" , padding:"25px"}} key={index}>
+    <Stack
+      sx={{
+        display: "flex",
+        gap: "20px",
+        border: "1px solid #a78bfa",
+        width: "350px",
+        padding: "25px",
+      }}
+      key={index}
+    >
       <Typography variant="h5">{e?.title}</Typography>
-      <Typography>{e?.desc?.slice(0,50)} ...</Typography>
+      <Typography>{e?.desc?.slice(0, 50)} ...</Typography>
       <Typography>Author : {e?.author}</Typography>
       <Button variant="contained" color="secondary">
-        <Link style={{width:"100%"}} to={`/post-details/${e?.title?.split(" ")?.join("-")}/${e?._id}`}>More Info</Link>
+        <Link
+          style={{ width: "100%" }}
+          to={`/post-details/${e?.title?.split(" ")?.join("-")}/${e?._id}`}
+        >
+          More Info
+        </Link>
       </Button>
     </Stack>
   ));
+
   return (
     <>
       {posts ? (
@@ -32,7 +47,7 @@ export default function Home() {
               sx={{
                 display: "grid",
                 gap: "20px",
-                marginTop:"30px",
+                marginTop: "30px",
                 gridTemplateColumns: "auto auto auto",
               }}
             >

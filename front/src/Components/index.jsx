@@ -6,21 +6,9 @@ import { logout } from "../store/Slices/AuthSlice";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const [categories, setCategories] = useState();
   const { token } = useSelector((state) => state.auth);
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("http://localhost:5000/api/categories");
-      const data = await res.json();
-      setCategories(data?.data);
-    })();
-  }, []);
 
-  const items = categories?.map((category, index) => (
-    <Stack component={"li"} key={index}>
-      <Link style={{ color: "#A78BFA" }}>{category?.name}</Link>
-    </Stack>
-  ));
+
 
   return (
     <>
@@ -32,14 +20,10 @@ export default function Header() {
           <Stack component={"li"}>
             <Link style={{ color: "#A78BFA" }}>Home</Link>
           </Stack>
-          {items}
           {token ? (
             <>
               <Stack component={"li"}>
-                <Link style={{ color: "#A78BFA" }}>Create Category</Link>
-              </Stack>
-              <Stack component={"li"}>
-                <Link style={{ color: "#A78BFA" }}>Create Category</Link>
+                <Link to={'/create-post'} style={{ color: "#A78BFA" }}>Create Post</Link>
               </Stack>
               <Stack component={"li"}>
                 <Button

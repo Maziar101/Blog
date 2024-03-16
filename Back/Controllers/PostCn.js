@@ -17,7 +17,7 @@ export const createPost = async (req, res, next) => {
   try {
     const { author = "", userid = "", ...others } = req.body;
     const { id, username } = jwt.verify(
-      req.authorization.split(" ")[1],
+        req.headers.authorization.split(" ")[1],
       process.env.JWT_SECRET
     );
     const newPost = await Post.create({
