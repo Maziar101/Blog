@@ -55,16 +55,16 @@ export const getOnePost = async (req, res, next) => {
 };
 export const updatePost = async (req, res, next) => {
   try {
-    const updatedPost = await Post.findByIdAndUpdate(
+    const newPost = await Post.findByIdAndUpdate(
       req.params.id,
       { ...req.body },
       { new: true }
     );
-    return res.status(200).json({
+    return res.status(201).json({
       data: {
-        post: updatedPost,
+        post: newPost,
       },
-      message: "The Post has been Updated",
+      message: `post ${newPost.title} is update`,
     });
   } catch (err) {
     return res.status(400).json({
